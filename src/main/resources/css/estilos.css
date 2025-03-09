@@ -1,0 +1,91 @@
+@font-face {
+    font-family: "Minangkabau";
+    src: url("../fonts/Minangkabau.TTF");
+} 
+@font-face {
+    font-family: "MrsEavesBold";
+    src: url("../fonts/MrsEavesBold.ttf");
+} 
+
+#mainAnchor {
+    -fx-background-image: url("/imagenes/fondoMain.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 900 506;
+    -fx-background-position: center center;
+}
+
+#tituloAkinator {
+    -fx-font-family: "Minangkabau", Arial;
+    -fx-font-size: 85px;
+    -fx-text-fill: linear-gradient(#fee69d, #ffa303);
+    -fx-effect: dropshadow(gaussian, #8B0000, 5, 0.8, 3, 3);
+    -fx-stroke: #8B0000;
+    -fx-stroke-width: 2px; 
+} 
+
+#botonPlay, #botonOptions, #botonMenu {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-font-size: 28px;
+    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(#FFD700, #FFA500);
+    -fx-border-color: #894601;
+    -fx-border-width: 3px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0, 1, 2;
+    -fx-effect: innershadow(gaussian, #FFFFFF80, 10, 0.5, 0, -2);
+}
+
+#botonSi, #botonNo {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-font-size: 28px;
+    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(#FFD700, #FFA500);
+    -fx-border-color: #894601;
+    -fx-background-insets: 0, 1, 2;
+    -fx-effect: innershadow(gaussian, #FFFFFF80, 10, 0.5, 0, -2);
+}
+
+#txtUEES {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+}
+
+#labelPregunta {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-text-fill: black;
+    -fx-font-size: 28px;
+}
+
+#labelNum, #personajeEs {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+}
+
+#labelResultado {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-text-fill: black;
+    -fx-font-size: 24px;
+}
+
+#botonPlay:hover, #botonOptions:hover, #botonSi:hover, #botonNo:hover, #botonMenu:hover {
+    -fx-background-color: linear-gradient(#603813, #B29F94);
+    -fx-text-fill: white;
+}
+
+#cerrar, #minimizar {
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0; 
+}
+
+#cerrar:hover {
+    -fx-background-color: #F42E2E;
+    -fx-text-fill: white;
+}
+
+#minimizar:hover {
+    -fx-background-color:#E8E7E7;
+}
