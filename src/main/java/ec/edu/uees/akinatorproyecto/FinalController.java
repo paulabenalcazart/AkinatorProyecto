@@ -49,6 +49,7 @@ public class FinalController implements Initializable{
                 stage.setY(e.getScreenY() - yOffset);
             }
         });
+        System.out.println("Hola yo cambié");
     }
     
     private String getWikipediaImage(String actorName) {
