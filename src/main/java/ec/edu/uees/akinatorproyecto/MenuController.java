@@ -3,15 +3,11 @@ package ec.edu.uees.akinatorproyecto;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -63,6 +59,25 @@ public class MenuController implements Initializable {
         transition.play();
         
         // Animacion titulo (con GPT porque estaba dificil)
+        tituloAkinator.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                iniciarBrillo();
+            }
+        });
+    }
+    
+    @FXML
+    private void cerrarStage() {
+        stage = (Stage) cerrar.getScene().getWindow();
+        stage.close();
+    }
+    @FXML
+    private void minimizarStage() {
+        stage = (Stage) minimizar.getScene().getWindow();
+        stage.setIconified(true);
+    }
+    
+    private void iniciarBrillo() {
         Platform.runLater(() -> {
             double labelWidth = tituloAkinator.getWidth();
             double labelHeight = tituloAkinator.getHeight();
@@ -95,16 +110,5 @@ public class MenuController implements Initializable {
             Parent parentContainer = tituloAkinator.getParent();
             ((Pane) parentContainer).getChildren().add(tituloBrillo);
         }); 
-    }
-    
-    @FXML
-    private void cerrarStage() {
-        stage = (Stage) cerrar.getScene().getWindow();
-        stage.close();
-    }
-    @FXML
-    private void minimizarStage() {
-        stage = (Stage) minimizar.getScene().getWindow();
-        stage.setIconified(true);
     }
 }

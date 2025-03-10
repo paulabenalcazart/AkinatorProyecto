@@ -27,12 +27,12 @@ public class App extends Application {
         Parent nuevaVista = loadFXML(fxml);
         Scene escena = scene;
         Parent root = escena.getRoot();
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.5), root);
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.3), root);
         fadeOut.setFromValue(1);
         fadeOut.setToValue(0.2);
         fadeOut.setOnFinished(event -> {
             escena.setRoot(nuevaVista);
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.8), nuevaVista);
+            FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.6), nuevaVista);
             fadeIn.setFromValue(0.5);
             fadeIn.setToValue(1);
             fadeIn.play();
