@@ -49,7 +49,6 @@ public class FinalController implements Initializable{
                 stage.setY(e.getScreenY() - yOffset);
             }
         });
-        System.out.println("No me gustó, yo quiero poner chao");
     }
     
     private String getWikipediaImage(String actorName) {
