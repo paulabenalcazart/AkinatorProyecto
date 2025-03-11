@@ -23,7 +23,7 @@
     -fx-stroke-width: 2px; 
 } 
 
-#botonPlay, #botonOptions, #botonMenu {
+#botonPlay, #botonOptions, #botonMenu, #btnOpcion1, #btnOpcion2, #btnOpcion3, #btnRegresar {
     -fx-font-family: "MrsEavesBold" Arial;
     -fx-font-size: 28px;
     -fx-text-fill: black;
@@ -52,7 +52,7 @@
     -fx-text-fill: black;
 }
 
-#labelPregunta {
+#labelPregunta, #labelOptions {
     -fx-font-family: "MrsEavesBold" Arial;
     -fx-text-fill: black;
     -fx-font-size: 28px;
@@ -70,7 +70,7 @@
     -fx-font-size: 24px;
 }
 
-#botonPlay:hover, #botonOptions:hover, #botonSi:hover, #botonNo:hover, #botonMenu:hover {
+#botonPlay:hover, #botonOptions:hover, #botonSi:hover, #botonNo:hover, #botonMenu:hover, #btnOpcion1:hover, #btnOpcion2:hover, #btnOpcion3:hover, #btnRegresar:hover {
     -fx-background-color: linear-gradient(#603813, #B29F94);
     -fx-text-fill: white;
 }

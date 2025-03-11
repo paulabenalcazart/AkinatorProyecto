@@ -13,9 +13,11 @@ import javafx.util.Duration;
 public class App extends Application {
 
     private static Scene scene;
+    private static Stage primaryStage;
 
     @Override
     public void start(Stage stage) throws IOException {
+        primaryStage = stage;
         scene = new Scene(loadFXML("menu"));
         scene.getStylesheets().add(getClass().getResource("/css/estilos.css").toExternalForm());
         stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
@@ -41,7 +43,16 @@ public class App extends Application {
     }
     
     static void setRootSinAnimar(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        Parent root = loader.load();
+        if (primaryStage == null) {
+            System.out.println("Error: el Stage es null, no se puede cambiar la escena.");
+            return;
+        }
+        Scene newScene = new Scene(root);
+        scene = newScene;
+        primaryStage.setScene(newScene);
+        primaryStage.show();
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
