@@ -35,6 +35,11 @@ public class MenuController implements Initializable {
     private void switchToSecondary() throws IOException {
         App.setRoot("juego");
     }
+    
+    @FXML
+    private void switchToOptions() throws IOException {
+        App.setRootSinAnimar("options");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
