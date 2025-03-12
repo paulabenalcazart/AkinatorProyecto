@@ -1,5 +1,6 @@
 package ec.edu.uees.akinatorproyecto;
 
+import ec.edu.uees.opciones.AnimationManager;
 import ec.edu.uees.opciones.MusicPlayer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,20 +29,24 @@ public class App extends Application {
     }
 
     static void setRoot(String fxml) throws IOException {
-        Parent nuevaVista = loadFXML(fxml);
-        Scene escena = scene;
-        Parent root = escena.getRoot();
-        FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.3), root);
-        fadeOut.setFromValue(1);
-        fadeOut.setToValue(0.2);
-        fadeOut.setOnFinished(event -> {
-            escena.setRoot(nuevaVista);
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.6), nuevaVista);
-            fadeIn.setFromValue(0.5);
-            fadeIn.setToValue(1);
-            fadeIn.play();
-        });
-        fadeOut.play();
+        if(AnimationManager.getInstance().areAnimationsEnabled()) {
+            Parent nuevaVista = loadFXML(fxml);
+            Scene escena = scene;
+            Parent root = escena.getRoot();
+            FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.3), root);
+            fadeOut.setFromValue(1);
+            fadeOut.setToValue(0.2);
+            fadeOut.setOnFinished(event -> {
+                escena.setRoot(nuevaVista);
+                FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.6), nuevaVista);
+                fadeIn.setFromValue(0.5);
+                fadeIn.setToValue(1);
+                fadeIn.play();
+            });
+            fadeOut.play();
+        } else {
+            setRootSinAnimar(fxml);
+        }
     }
     
     static void setRootSinAnimar(String fxml) throws IOException {

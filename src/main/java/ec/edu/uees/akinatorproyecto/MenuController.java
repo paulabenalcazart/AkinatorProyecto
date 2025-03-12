@@ -1,5 +1,6 @@
 package ec.edu.uees.akinatorproyecto;
 
+import ec.edu.uees.opciones.AnimationManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -56,19 +57,21 @@ public class MenuController implements Initializable {
             }
         });
         
-        // Animacion Akinator
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(2), akinatorMenu);
-        transition.setByY(20);
-        transition.setAutoReverse(true);
-        transition.setCycleCount(TranslateTransition.INDEFINITE);
-        transition.play();
-        
-        // Animacion titulo (con GPT porque estaba dificil)
-        tituloAkinator.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if (newScene != null) {
-                iniciarBrillo();
-            }
-        });
+        if(AnimationManager.getInstance().areAnimationsEnabled()) {
+            // Animacion Akinator
+            TranslateTransition transition = new TranslateTransition(Duration.seconds(2), akinatorMenu);
+            transition.setByY(20);
+            transition.setAutoReverse(true);
+            transition.setCycleCount(TranslateTransition.INDEFINITE);
+            transition.play();
+
+            // Animacion titulo (con GPT porque estaba dificil)
+            tituloAkinator.sceneProperty().addListener((obs, oldScene, newScene) -> {
+                if (newScene != null) {
+                    iniciarBrillo();
+                }
+            });    
+        }
     }
     
     @FXML

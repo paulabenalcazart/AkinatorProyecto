@@ -22,6 +22,11 @@
             <Image url="@../../../../imagenes/fondoMain.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="imagenFondo" fitHeight="705.0" fitWidth="440.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" visible="false">
+         <image>
+            <Image url="@../../../../imagenes/fondoPergamino.png" />
+         </image>
+      </ImageView>
       <MediaView fx:id="fondoPergamino" fitHeight="715.0" fitWidth="450.0" preserveRatio="false" />
       <StackPane layoutX="-16.0" layoutY="-8.0" prefHeight="40.0" prefWidth="485.0">
          <children>
