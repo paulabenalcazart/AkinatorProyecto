@@ -1,5 +1,6 @@
 package ec.edu.uees.akinatorproyecto;
 
+import ec.edu.uees.opciones.AnimationManager;
 import ec.edu.uees.opciones.MusicPlayer;
 import ec.edu.uees.opciones.SFXPlayer;
 import java.io.IOException;
@@ -18,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
@@ -33,9 +36,11 @@ public class OptionsController implements Initializable{
     private double yOffset = 0;
     @FXML private Button minimizar, cerrar, btnRegresar;
     @FXML private Label labelOptions;
+    @FXML private ImageView imagenFondo;
     @FXML private MediaView fondoPergamino;
     @FXML private HBox hboxMusica, hboxSFX, hboxBrillo, hboxAnimaciones;
     @FXML private Slider sliderMusica, sliderSFX;
+    @FXML private ToggleButton toggleAnimaciones;
     private MediaPlayer mediaPlayer;
     private Media media;
     private String filePath = getClass().getResource("/imagenes/pergaminoVideo.mp4").toExternalForm();
@@ -61,37 +66,50 @@ public class OptionsController implements Initializable{
             }
         });
         
-        Timeline timeline = new Timeline(
-            new KeyFrame(Duration.seconds(0.7 - videoOffset), e -> animarNodo(labelOptions)),
-            new KeyFrame(Duration.seconds(0.85 - videoOffset), e -> animarNodo(hboxMusica)),
-            new KeyFrame(Duration.seconds(0.9 - videoOffset), e -> animarNodo(hboxSFX)),
-            new KeyFrame(Duration.seconds(1.05 - videoOffset), e -> animarNodo(hboxBrillo)),
-            new KeyFrame(Duration.seconds(1.2 - videoOffset), e -> animarNodo(hboxAnimaciones)),    
-            new KeyFrame(Duration.seconds(1.35 - videoOffset), e -> animarNodo(btnRegresar))
-        );
-        videoOffset = 0.2;
-        
-        Platform.runLater(() -> {
-            try {
-                if(mediaPlayer != null) {
-                    mediaPlayer.dispose();
-                    System.gc();
+        if(AnimationManager.getInstance().areAnimationsEnabled()) {
+            Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0.7 - videoOffset), e -> animarNodo(labelOptions)),
+                new KeyFrame(Duration.seconds(0.85 - videoOffset), e -> animarNodo(hboxMusica)),
+                new KeyFrame(Duration.seconds(0.9 - videoOffset), e -> animarNodo(hboxSFX)),
+                new KeyFrame(Duration.seconds(1.05 - videoOffset), e -> animarNodo(hboxBrillo)),
+                new KeyFrame(Duration.seconds(1.2 - videoOffset), e -> animarNodo(hboxAnimaciones)),    
+                new KeyFrame(Duration.seconds(1.35 - videoOffset), e -> animarNodo(btnRegresar))
+            );
+            videoOffset = 0.2;
+
+            Platform.runLater(() -> {
+                try {
+                    if(mediaPlayer != null) {
+                        mediaPlayer.dispose();
+                        System.gc();
+                    }
+                    if(imagenFondo.isVisible()){
+                        imagenFondo.setVisible(false);
+                    }
+                    media = new Media(filePath);
+                    mediaPlayer = new MediaPlayer(media);
+                    fondoPergamino.setMediaPlayer(mediaPlayer);
+                    mediaPlayer.setOnReady(() -> {
+                        mediaPlayer.play();
+                    });
+                    mediaPlayer.setOnError(() -> {
+                        System.out.println(mediaPlayer.getError());
+                        restart();
+                    });
+                    timeline.play();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                media = new Media(filePath);
-                mediaPlayer = new MediaPlayer(media);
-                fondoPergamino.setMediaPlayer(mediaPlayer);
-                mediaPlayer.setOnReady(() -> {
-                    mediaPlayer.play();
-                });
-                mediaPlayer.setOnError(() -> {
-                    System.out.println(mediaPlayer.getError());
-                    restart();
-                });
-                timeline.play();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+            });    
+        } else {
+            hboxMusica.setVisible(true);
+            hboxSFX.setVisible(true);
+            hboxBrillo.setVisible(true);
+            hboxAnimaciones.setVisible(true);
+            labelOptions.setVisible(true);
+            btnRegresar.setVisible(true);
+            imagenFondo.setVisible(true);
+        }
         
         // OPCIÓN MUSICA
         sliderMusica.setValue(MusicPlayer.getMediaPlayer().getVolume());
@@ -103,6 +121,15 @@ public class OptionsController implements Initializable{
         sliderSFX.setValue(SFXPlayer.getVolume());
         sliderSFX.valueProperty().addListener((observable, oldValue, newValue) -> {
             SFXPlayer.setVolume(newValue.doubleValue());
+        });
+        
+        // OPCIÓN BRILLO
+        
+        
+        //OPCIÓN ANIMACIONES
+        toggleAnimaciones.setSelected(AnimationManager.getInstance().areAnimationsEnabled());
+        toggleAnimaciones.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            AnimationManager.getInstance().setAnimationsEnabled(newValue);
         });
         
     }
