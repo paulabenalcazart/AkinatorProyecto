@@ -9,7 +9,7 @@ public class SFXPlayer {
     private static double volume = 1;
 
     public static void playSFX() {
-        URL resource = SFXPlayer.class.getResource("/audio/sfx.mp3");
+        URL resource = SFXPlayer.class.getResource("/audio/sfx.wav");
         Media media = new Media(resource.toString());
         sfxPlayer = new MediaPlayer(media);
         sfxPlayer.setVolume(volume);
