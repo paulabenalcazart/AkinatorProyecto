@@ -1,5 +1,6 @@
 package ec.edu.uees.akinatorproyecto;
 
+import ec.edu.uees.opciones.MusicPlayer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        new Thread(() -> MusicPlayer.startMusic()).start();
         primaryStage = stage;
         scene = new Scene(loadFXML("menu"));
         scene.getStylesheets().add(getClass().getResource("/css/estilos.css").toExternalForm());

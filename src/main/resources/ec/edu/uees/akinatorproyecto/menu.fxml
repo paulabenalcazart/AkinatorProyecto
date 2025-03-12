@@ -27,11 +27,11 @@
             <Image url="@../../../../imagenes/akinator_menu.png" />
          </image>
       </ImageView>
-      <Button fx:id="botonPlay" layoutX="132.0" layoutY="500.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="62.0" prefWidth="183.0" text="Play">
+      <Button fx:id="botonPlay" layoutX="132.0" layoutY="500.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToSecondary" prefHeight="62.0" prefWidth="183.0" text="Jugar">
          <font>
             <Font name="MrsEavesBold" size="28.0" />
          </font></Button>
-      <Button fx:id="botonOptions" layoutX="132.0" layoutY="570.0" mnemonicParsing="false" onAction="#switchToOptions" prefHeight="62.0" prefWidth="183.0" text="Options">
+      <Button fx:id="botonOptions" layoutX="132.0" layoutY="570.0" mnemonicParsing="false" onAction="#switchToOptions" prefHeight="62.0" prefWidth="183.0" text="Opciones">
          <font>
             <Font name="MrsEavesBold" size="28.0" />
          </font>

@@ -44,11 +44,6 @@
             <Image url="@../../../../imagenes/papiro.png" />
          </image>
       </ImageView>
-      <Button fx:id="botonMenu" layoutX="43.0" layoutY="578.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="62.0" prefWidth="183.0" text="Menú">
-         <font>
-            <Font name="MrsEavesBold" size="28.0" />
-         </font>
-      </Button>
       <VBox alignment="TOP_CENTER" layoutX="47.0" layoutY="106.0" prefHeight="320.0" prefWidth="260.0" spacing="10.0">
          <children>
             <Label fx:id="personajeEs" text="Tu personaje es..." />
@@ -77,5 +72,10 @@
             </ImageView>
          </children>
       </StackPane>
+      <Button fx:id="botonMenu" layoutX="43.0" layoutY="578.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="62.0" prefWidth="183.0" text="Menú">
+         <font>
+            <Font name="MrsEavesBold" size="28.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

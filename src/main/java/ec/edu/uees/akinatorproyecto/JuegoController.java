@@ -1,5 +1,6 @@
 package ec.edu.uees.akinatorproyecto;
 
+import ec.edu.uees.opciones.SFXPlayer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +33,19 @@ public class JuegoController implements Initializable{
                 stage.setY(e.getScreenY() - yOffset);
             }
         });
+        
+        botonSi.setOnAction(event -> {
+            SFXPlayer.playSFX();
+        });
+
+        botonNo.setOnAction(event -> {
+            SFXPlayer.playSFX();
+            try {
+                irAFinal();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
     }
     
     @FXML
@@ -44,8 +58,7 @@ public class JuegoController implements Initializable{
         stage = (Stage) minimizar.getScene().getWindow();
         stage.setIconified(true);
     }
-    
-    @FXML
+
     private void irAFinal() throws IOException {
         App.setRoot("final");
     }
