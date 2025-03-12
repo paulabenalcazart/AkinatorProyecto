@@ -23,7 +23,7 @@
     -fx-stroke-width: 2px; 
 } 
 
-#botonPlay, #botonOptions, #botonMenu, #btnOpcion1, #btnOpcion2, #btnOpcion3, #btnRegresar {
+#botonPlay, #botonOptions, #botonMenu, #btnRegresar {
     -fx-font-family: "MrsEavesBold" Arial;
     -fx-font-size: 28px;
     -fx-text-fill: black;
@@ -64,13 +64,64 @@
     -fx-font-size: 20px;
 }
 
+#labelMusica, #labelSFX, #labelBrillo, #labelAnimaciones {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+}
+
+.slider .thumb {
+    -fx-background-color: black;
+    -fx-background-radius: 50%;
+    -fx-pref-width: 15px;
+    -fx-pref-height: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+}
+
+.slider .track {
+    -fx-background-color: #ddd;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.toggle-button {
+    -fx-background-color: #e74c3c;
+    -fx-background-radius: 30px;
+    -fx-border-radius: 30px;
+    -fx-border-color: #c0392b;
+    -fx-border-width: 2px;
+    -fx-padding: 5px;
+    -fx-pref-width: 60px;
+    -fx-pref-height: 30px;
+    -fx-alignment: center-left;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #2ecc71;
+    -fx-border-color: #27ae60;
+}
+
+.thumb {
+    -fx-translate-x: -6px;
+    -fx-background-color: white;
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    -fx-pref-width: 24px;
+    -fx-pref-height: 24px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 2);
+}
+
+.toggle-button:selected .thumb {
+    -fx-translate-x: 27px;
+}
+
 #labelResultado {
     -fx-font-family: "MrsEavesBold" Arial;
     -fx-text-fill: black;
     -fx-font-size: 24px;
 }
 
-#botonPlay:hover, #botonOptions:hover, #botonSi:hover, #botonNo:hover, #botonMenu:hover, #btnOpcion1:hover, #btnOpcion2:hover, #btnOpcion3:hover, #btnRegresar:hover {
+#botonPlay:hover, #botonOptions:hover, #botonSi:hover, #botonNo:hover, #botonMenu:hover, #btnRegresar:hover {
     -fx-background-color: linear-gradient(#603813, #B29F94);
     -fx-text-fill: white;
 }

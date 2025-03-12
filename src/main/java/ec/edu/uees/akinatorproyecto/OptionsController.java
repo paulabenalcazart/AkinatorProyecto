@@ -1,5 +1,7 @@
 package ec.edu.uees.akinatorproyecto;
 
+import ec.edu.uees.opciones.MusicPlayer;
+import ec.edu.uees.opciones.SFXPlayer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,7 +17,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -27,13 +31,15 @@ public class OptionsController implements Initializable{
     private Stage stage;
     private double xOffset = 0;
     private double yOffset = 0;
-    @FXML private Button minimizar, cerrar, btnOpcion1, btnOpcion2, btnOpcion3, btnRegresar;
+    @FXML private Button minimizar, cerrar, btnRegresar;
     @FXML private Label labelOptions;
     @FXML private MediaView fondoPergamino;
+    @FXML private HBox hboxMusica, hboxSFX, hboxBrillo, hboxAnimaciones;
+    @FXML private Slider sliderMusica, sliderSFX;
     private MediaPlayer mediaPlayer;
     private Media media;
     private String filePath = getClass().getResource("/imagenes/pergaminoVideo.mp4").toExternalForm();
-    private int videoOffset = 0;
+    private double videoOffset = 0;
 
     @FXML
     private void switchToMenu() throws IOException {
@@ -57,12 +63,13 @@ public class OptionsController implements Initializable{
         
         Timeline timeline = new Timeline(
             new KeyFrame(Duration.seconds(0.7 - videoOffset), e -> animarNodo(labelOptions)),
-            new KeyFrame(Duration.seconds(0.9 - videoOffset), e -> animarNodo(btnOpcion1)),
-            new KeyFrame(Duration.seconds(1.1 - videoOffset), e -> animarNodo(btnOpcion2)),
-            new KeyFrame(Duration.seconds(1.3 - videoOffset), e -> animarNodo(btnOpcion3)),
-            new KeyFrame(Duration.seconds(1.5 - videoOffset), e -> animarNodo(btnRegresar))
+            new KeyFrame(Duration.seconds(0.85 - videoOffset), e -> animarNodo(hboxMusica)),
+            new KeyFrame(Duration.seconds(0.9 - videoOffset), e -> animarNodo(hboxSFX)),
+            new KeyFrame(Duration.seconds(1.05 - videoOffset), e -> animarNodo(hboxBrillo)),
+            new KeyFrame(Duration.seconds(1.2 - videoOffset), e -> animarNodo(hboxAnimaciones)),    
+            new KeyFrame(Duration.seconds(1.35 - videoOffset), e -> animarNodo(btnRegresar))
         );
-        videoOffset = 2;
+        videoOffset = 0.2;
         
         Platform.runLater(() -> {
             try {
@@ -84,6 +91,18 @@ public class OptionsController implements Initializable{
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        });
+        
+        // OPCIÓN MUSICA
+        sliderMusica.setValue(MusicPlayer.getMediaPlayer().getVolume());
+        sliderMusica.valueProperty().addListener((observable, oldValue, newValue) -> {
+            MusicPlayer.setVolume(newValue.doubleValue());
+        });
+        
+        // OPCIÓN SFX
+        sliderSFX.setValue(SFXPlayer.getVolume());
+        sliderSFX.valueProperty().addListener((observable, oldValue, newValue) -> {
+            SFXPlayer.setVolume(newValue.doubleValue());
         });
         
     }

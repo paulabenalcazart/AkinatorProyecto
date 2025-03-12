@@ -55,7 +55,7 @@
                         <Font name="MrsEavesBold" size="28.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botonNo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#irAFinal" prefHeight="74.0" prefWidth="226.0" text="No">
+                  <Button fx:id="botonNo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="74.0" prefWidth="226.0" text="No">
                      <font>
                         <Font name="MrsEavesBold" size="28.0" />
                      </font>
