@@ -3,6 +3,7 @@ package ec.edu.uees.akinatorproyecto;
 import ec.edu.uees.opciones.AnimationManager;
 import ec.edu.uees.opciones.MusicPlayer;
 import ec.edu.uees.opciones.SFXPlayer;
+import ec.edu.uees.opciones.ScreenManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,13 +35,13 @@ public class OptionsController implements Initializable{
     private Stage stage;
     private double xOffset = 0;
     private double yOffset = 0;
-    @FXML private Button minimizar, cerrar, btnRegresar;
+    @FXML private Button minimizar, cerrar;
     @FXML private Label labelOptions;
     @FXML private ImageView imagenFondo;
     @FXML private MediaView fondoPergamino;
-    @FXML private HBox hboxMusica, hboxSFX, hboxBrillo, hboxAnimaciones;
+    @FXML private HBox hboxMusica, hboxSFX, hboxBrillo, hboxAnimaciones, hboxBotones;
     @FXML private Slider sliderMusica, sliderSFX;
-    @FXML private ToggleButton toggleAnimaciones;
+    @FXML private ToggleButton toggleAnimaciones, togglePantalla;
     private MediaPlayer mediaPlayer;
     private Media media;
     private String filePath = getClass().getResource("/imagenes/pergaminoVideo.mp4").toExternalForm();
@@ -53,19 +54,21 @@ public class OptionsController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        mainAnchor.setOnMousePressed(e -> {
-            xOffset = e.getSceneX();
-            yOffset = e.getSceneY();
-        });
-        
-        mainAnchor.setOnMouseDragged(e -> {
-            stage = (Stage) cerrar.getScene().getWindow();
-            if(!stage.isFullScreen()){
-                stage.setX(e.getScreenX() - xOffset);
-                stage.setY(e.getScreenY() - yOffset);
-            }
-        });
-        
+        if(!ScreenManager.getInstance().isScreenLocked()) {
+            mainAnchor.setOnMousePressed(e -> {
+               xOffset = e.getSceneX();
+               yOffset = e.getSceneY();
+           });
+
+           mainAnchor.setOnMouseDragged(e -> {
+               stage = (Stage) cerrar.getScene().getWindow();
+               if(!stage.isFullScreen()){
+                   stage.setX(e.getScreenX() - xOffset);
+                   stage.setY(e.getScreenY() - yOffset);
+               }
+           });   
+        }
+               
         if(AnimationManager.getInstance().areAnimationsEnabled()) {
             Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0.7 - videoOffset), e -> animarNodo(labelOptions)),
@@ -73,7 +76,7 @@ public class OptionsController implements Initializable{
                 new KeyFrame(Duration.seconds(0.9 - videoOffset), e -> animarNodo(hboxSFX)),
                 new KeyFrame(Duration.seconds(1.05 - videoOffset), e -> animarNodo(hboxBrillo)),
                 new KeyFrame(Duration.seconds(1.2 - videoOffset), e -> animarNodo(hboxAnimaciones)),    
-                new KeyFrame(Duration.seconds(1.35 - videoOffset), e -> animarNodo(btnRegresar))
+                new KeyFrame(Duration.seconds(1.35 - videoOffset), e -> animarNodo(hboxBotones))
             );
             videoOffset = 0.2;
 
@@ -107,7 +110,7 @@ public class OptionsController implements Initializable{
             hboxBrillo.setVisible(true);
             hboxAnimaciones.setVisible(true);
             labelOptions.setVisible(true);
-            btnRegresar.setVisible(true);
+            hboxBotones.setVisible(true);
             imagenFondo.setVisible(true);
         }
         
@@ -123,7 +126,31 @@ public class OptionsController implements Initializable{
             SFXPlayer.setVolume(newValue.doubleValue());
         });
         
-        // OPCIÓN BRILLO
+        // OPCIÓN LOCK SCREEN
+        togglePantalla.setSelected(ScreenManager.getInstance().isScreenLocked());
+        togglePantalla.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            ScreenManager.getInstance().setScreenLock(newValue);
+
+            if (newValue) {
+                // Bloquear la pantalla inmediatamente
+                mainAnchor.setOnMousePressed(null);
+                mainAnchor.setOnMouseDragged(null);
+            } else {
+                // Restaurar el movimiento de la pantalla
+                mainAnchor.setOnMousePressed(e -> {
+                    xOffset = e.getSceneX();
+                    yOffset = e.getSceneY();
+                });
+
+                mainAnchor.setOnMouseDragged(e -> {
+                    stage = (Stage) cerrar.getScene().getWindow();
+                    if (!stage.isFullScreen()) {
+                        stage.setX(e.getScreenX() - xOffset);
+                        stage.setY(e.getScreenY() - yOffset);
+                    }
+                });
+            }
+        });
         
         
         //OPCIÓN ANIMACIONES
@@ -165,5 +192,18 @@ public class OptionsController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @FXML
+    private void resetearOpciones(){
+        MusicPlayer.setVolume(1);
+        SFXPlayer.setVolume(1);
+        ScreenManager.getInstance().setScreenLock(false);
+        AnimationManager.getInstance().setAnimationsEnabled(true);
+        
+        sliderMusica.setValue(1);
+        sliderSFX.setValue(1);
+        togglePantalla.setSelected(false);
+        toggleAnimaciones.setSelected(true);
     }
 }

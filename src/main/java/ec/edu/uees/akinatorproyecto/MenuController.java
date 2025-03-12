@@ -1,6 +1,7 @@
 package ec.edu.uees.akinatorproyecto;
 
 import ec.edu.uees.opciones.AnimationManager;
+import ec.edu.uees.opciones.ScreenManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,18 +45,20 @@ public class MenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        mainAnchor.setOnMousePressed(e -> {
-            xOffset = e.getSceneX();
-            yOffset = e.getSceneY();
-        });
-        
-        mainAnchor.setOnMouseDragged(e -> {
-            stage = (Stage) cerrar.getScene().getWindow();
-            if(!stage.isFullScreen()){
-                stage.setX(e.getScreenX() - xOffset);
-                stage.setY(e.getScreenY() - yOffset);
-            }
-        });
+        if(!ScreenManager.getInstance().isScreenLocked()) {
+            mainAnchor.setOnMousePressed(e -> {
+                xOffset = e.getSceneX();
+                yOffset = e.getSceneY();
+            });
+
+            mainAnchor.setOnMouseDragged(e -> {
+                stage = (Stage) cerrar.getScene().getWindow();
+                if(!stage.isFullScreen()){
+                    stage.setX(e.getScreenX() - xOffset);
+                    stage.setY(e.getScreenY() - yOffset);
+                }
+            });
+        }
         
         if(AnimationManager.getInstance().areAnimationsEnabled()) {
             // Animacion Akinator
