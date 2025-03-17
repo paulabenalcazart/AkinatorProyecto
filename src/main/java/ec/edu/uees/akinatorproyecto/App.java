@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import javafx.animation.FadeTransition;
+import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public class App extends Application {
@@ -23,8 +24,10 @@ public class App extends Application {
         primaryStage = stage;
         scene = new Scene(loadFXML("menu"));
         scene.getStylesheets().add(getClass().getResource("/css/estilos.css").toExternalForm());
+        Image icon = new Image(getClass().getResourceAsStream("/imagenes/akinatorIcono.png"));
         stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
         stage.setScene(scene);
+        stage.getIcons().add(icon);
         stage.show();
     }
 
