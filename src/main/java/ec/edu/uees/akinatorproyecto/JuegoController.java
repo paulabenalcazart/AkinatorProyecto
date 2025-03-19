@@ -1,9 +1,13 @@
 package ec.edu.uees.akinatorproyecto;
 
+import ec.edu.uees.modelo.BT;
 import ec.edu.uees.opciones.SFXPlayer;
 import ec.edu.uees.opciones.ScreenManager;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,11 +47,6 @@ public class JuegoController implements Initializable{
 
         botonNo.setOnAction(event -> {
             SFXPlayer.playSFX();
-            try {
-                irAFinal();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
         });
     }
     
@@ -65,4 +64,27 @@ public class JuegoController implements Initializable{
     private void irAFinal() throws IOException {
         App.setRoot("final");
     }
+
+    private ArrayList<String> leerArchivo() {
+        ArrayList<String> lista = new ArrayList<>();
+        String archivo = "arbolActores.txt";
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                lista.add(linea);
+            }
+        } catch (IOException ex) {
+            System.out.println("Error de lectura: " + ex.getMessage());
+        }
+        return lista;
+    }
+    
+    private BT<String> armarArbol() {
+        BT<String> arbol = new BT<>();
+        ArrayList<String> texto = leerArchivo();
+        
+        arbol.armarPostOrder(texto);
+        
+        return arbol;
+    } 
 }
