@@ -26,7 +26,7 @@ public class JuegoController implements Initializable{
     private double yOffset = 0;
     @FXML private Button minimizar, cerrar, botonSi, botonNo;
     private BT<String> arbol = armarArbol();
-    @FXML Label labelNum, labelPregunta;
+    @FXML private Label labelNum, labelPregunta;
     private int contador = 1;
     private boolean pregunta = false;
     private char direccion = 'N';
@@ -99,7 +99,7 @@ public class JuegoController implements Initializable{
         App.setRoot("final");
     }
 
-    private ArrayList<String> leerArchivo() {
+    public ArrayList<String> leerArchivo() {
         ArrayList<String> lista = new ArrayList<>();
         String archivo = "arbolActores.txt";
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {

@@ -1,7 +1,9 @@
 Robert Downey Jr
 Tom Hanks
 ¿Su carrera está más enfocada a películas de acción?
+Cole Sprouse
 Chris Evans
+¿Es más conocido por televisión que por cine?
 Pedro Pascal
 Ryan Reynolds
 Tom Holland
@@ -16,7 +18,9 @@ Joaquin Phoenix
 ¿Se hizo famoso en el siglo XX?
 Timothée Chalamet
 ¿Se centra en temas oscuros y serios?
+Jorge Enrique Abello
 Leonardo DiCaprio
+¿Ha sido protagonista de una telenovela?
 ¿Ha sido protagonista de un musical?
 Brad Pitt
 Adam Sandler
@@ -51,7 +55,9 @@ Angelina Jolie
 ¿Es conocida por participar en musicales?
 Margot Robbie
 ¿Ha trabajado en Disney?
+Florencia Bertotti
 Jennifer Aniston
+¿Su idioma nativo es español?
 Millie Bobby Brown
 ¿Es más conocida por comedias?
 Anne Hathaway

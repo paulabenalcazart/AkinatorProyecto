@@ -1,11 +1,13 @@
 package ec.edu.uees.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 public class BT<E> {
     private Node<E> root;
     private Node<E> current;
+    private List<E> arbolPostOrder;
     
     class Node<E> {
         E data;
@@ -42,9 +44,9 @@ public class BT<E> {
     }
     
     public E getCurrent() {
-        return this.current.data;
+        return this.current != null ? this.current.data : null;
     }
-
+    
     public void armarPostOrder(List<E> postorder) {
         if (postorder == null || postorder.isEmpty()) return;
         
@@ -59,6 +61,32 @@ public class BT<E> {
         }
         root = stack.pop(); // la raiz del árbol es el ultimo nodo que queda en la pila
         current = root;
+    }
+    
+    public Node<E> buscar(E e) {
+        return buscar(root, e);
+    }
+
+    private Node<E> buscar(Node<E> p, E e) {
+        if (p == null) return null;
+        if (p.data.equals(e)) return p;
+
+        Node<E> encontrar = buscar(p.left, e);
+        if (encontrar == null) {
+            encontrar = buscar(p.right, e);
+        }
+        return encontrar;
+    }
+    
+    public boolean add(E pregunta, E izquierdo, E derecho) {
+        Node<E> padre = buscar(derecho);
+        if (padre == null || padre.left != null || padre.right != null) {
+            return false;
+        }
+        padre.data = pregunta;
+        padre.left = new Node<>(izquierdo);
+        padre.right = new Node<>(derecho);
+        return true;
     }
 
     public void preOrden() {
@@ -84,6 +112,20 @@ public class BT<E> {
             posOrden(p.left);
             posOrden(p.right);   
             System.out.print(p.data+" "); 
+        }
+    }
+    
+    public List<E> desarmarPostOrder() {
+        arbolPostOrder = new ArrayList<>();
+        desarmarPostOrder(this.root);
+        return arbolPostOrder;
+    }
+    
+    private void desarmarPostOrder(Node<E> p) {
+        if(p!=null) {
+            desarmarPostOrder(p.left);
+            desarmarPostOrder(p.right);   
+            arbolPostOrder.add(p.data);
         }
     }
 

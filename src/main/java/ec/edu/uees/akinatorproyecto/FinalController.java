@@ -1,5 +1,6 @@
 package ec.edu.uees.akinatorproyecto;
 
+import ec.edu.uees.modelo.BT;
 import ec.edu.uees.modelo.PersonajeSingleton;
 import ec.edu.uees.modelo.ResultadoSingleton;
 import ec.edu.uees.opciones.ScreenManager;
@@ -8,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.fxml.FXML;
@@ -138,7 +141,7 @@ public class FinalController implements Initializable{
     }
     
     @FXML
-    private void enviar() {
+    private void enviar() throws IOException {
         if ((textfield1.isVisible() && textfield1.getText().isBlank()) || 
            (textfield2.isVisible() && textfield2.getText().isBlank())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -155,17 +158,25 @@ public class FinalController implements Initializable{
             preguntaPerdida2.setVisible(true);
             textfield2.setVisible(true);
         } else if(textfield2.isVisible()) {
-            String archivo = "actoresExtras.txt";
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
-                bw.write(respuesta1);
-                bw.newLine();
-                bw.write(textfield2.getText());
-                bw.newLine();
-                PersonajeSingleton.getInstance().setPersonaje(textfield1.getText());
-                App.setRootSinAnimar("final");
-            } catch (IOException ex) {
-                System.out.println("Error al escribir el archivo: " + ex.getMessage());
+            BT<String> arbol = new BT<>();
+            JuegoController juego = new JuegoController();
+            ArrayList<String> arboltxt = juego.leerArchivo();
+            arbol.armarPostOrder(arboltxt);
+            arbol.add(textfield2.getText(), respuesta1, searchText);
+            reescribirArchivo(arbol.desarmarPostOrder());
+            PersonajeSingleton.getInstance().setPersonaje(respuesta1);
+            App.setRootSinAnimar("final");
+        }
+    }
+    
+    private void reescribirArchivo(List<String> texto) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("arbolActores.txt", false))) {
+            for (String linea : texto) {
+                writer.write(linea);
+                writer.newLine();
             }
+        } catch (IOException e) {
+            System.out.println("Ocurrió un error al escribir en el archivo: " + e.getMessage());
         }
     }
 }
