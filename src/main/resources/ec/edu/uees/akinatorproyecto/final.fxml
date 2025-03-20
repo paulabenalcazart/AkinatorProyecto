@@ -103,7 +103,7 @@
                   <Image url="@../../../../imagenes/burbujaimagen.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblAkinatorFinal" prefHeight="78.0" prefWidth="94.0" text="¡Genial, acierto de nuevo!" textAlignment="CENTER" translateY="-15.0" wrapText="true" />
+            <Label fx:id="lblAkinatorFinal" prefHeight="78.0" prefWidth="122.0" text="¡Genial, acierto de nuevo!" textAlignment="CENTER" translateY="-15.0" wrapText="true" />
          </children>
       </StackPane>
    </children>

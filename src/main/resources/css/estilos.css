@@ -36,7 +36,7 @@
     -fx-effect: innershadow(gaussian, #FFFFFF80, 10, 0.5, 0, -2);
 }
 
-#btnRegresar, #btnReset, #btnSiResultado, #btnNoResultado, #btnHome {
+#btnRegresar, #btnReset, #btnSiResultado, #btnNoResultado, #btnHome, #btnAlerta {
     -fx-font-family: "MrsEavesBold" Arial;
     -fx-font-size: 20px;
     -fx-text-fill: black;
@@ -147,8 +147,20 @@
     -fx-font-size: 24px;
 }
 
+#akinatordice {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+}
+
+#alertatexto {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+}
+
 #botonPlay:hover, #botonOptions:hover, #botonSi:hover, #botonNo:hover, 
-#btnRegresar:hover, #btnReset:hover, #btnSiResultado:hover, #btnNoResultado:hover, #btnHome:hover {
+#btnRegresar:hover, #btnReset:hover, #btnSiResultado:hover, #btnNoResultado:hover, #btnHome:hover, #btnAlerta:hover {
     -fx-background-color: linear-gradient(#603813, #B29F94);
     -fx-text-fill: white;
 }
@@ -165,7 +177,13 @@
     -fx-background-radius: 0; 
 }
 
-#cerrar:hover {
+#cerrarAlerta {
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0; 
+}
+
+#cerrar:hover, #cerrarAlerta:hover {
     -fx-background-color: #F42E2E;
     -fx-text-fill: white;
 }

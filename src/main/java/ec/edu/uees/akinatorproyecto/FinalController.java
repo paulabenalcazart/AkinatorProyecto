@@ -1,5 +1,6 @@
 package ec.edu.uees.akinatorproyecto;
 
+import ec.edu.uees.modelo.AlertaSingleton;
 import ec.edu.uees.modelo.BT;
 import ec.edu.uees.modelo.PersonajeSingleton;
 import ec.edu.uees.modelo.ResultadoSingleton;
@@ -15,10 +16,10 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -29,17 +30,21 @@ import javafx.stage.Stage;
 public class FinalController implements Initializable{
     private String searchText;
     private String imageUrl;
-    @FXML private ImageView imagenResultado, akinatorFinalDefault, akinatorFinal1, akinatorFinal2;
+    @FXML private ImageView imagenResultado, akinatorFinalDefault, akinatorFinal1, akinatorFinal2, imagenAlerta;
     @FXML private AnchorPane mainAnchor;
     @FXML private StackPane stackBurbuja;
     private Stage stage;
     private double xOffset = 0;
     private double yOffset = 0;
-    @FXML private Button cerrar, minimizar, btnHome;
-    @FXML private Label labelResultado, preguntaPerdida1, preguntaPerdida2,lblAkinatorFinal;
+    @FXML private Button cerrar, minimizar, btnHome, cerrarAlerta;
+    @FXML private Label labelResultado, preguntaPerdida1, preguntaPerdida2,lblAkinatorFinal, alertatexto;
     @FXML private VBox vboxBotonesResultados;
     @FXML private TextField textfield1, textfield2;
     private String respuesta1;
+    private BT<String> arbol = new BT<>();
+    private JuegoController juego = new JuegoController();
+    private ArrayList<String> arboltxt = juego.leerArchivo();
+    private App app = new App();;
     
     @FXML
     private void switchToMenu() throws IOException {
@@ -48,6 +53,8 @@ public class FinalController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        arbol.armarPostOrder(arboltxt);
+        
         searchText = PersonajeSingleton.getInstance().getPersonaje();
         if(labelResultado != null) {
             labelResultado.setText(searchText);
@@ -65,7 +72,11 @@ public class FinalController implements Initializable{
             });
 
             mainAnchor.setOnMouseDragged(e -> {
-                stage = (Stage) cerrar.getScene().getWindow();
+                if(cerrarAlerta == null) {
+                    stage = (Stage) cerrar.getScene().getWindow();    
+                } else {
+                    stage = (Stage) cerrarAlerta.getScene().getWindow(); 
+                }
                 if(!stage.isFullScreen()){
                     stage.setX(e.getScreenX() - xOffset);
                     stage.setY(e.getScreenY() - yOffset);
@@ -85,6 +96,12 @@ public class FinalController implements Initializable{
             lblAkinatorFinal.setText("¡Bravo! Me lo has puesto difícil.");
             stackBurbuja.setVisible(true);
             ResultadoSingleton.getInstance().setResultado(false);
+        }
+        
+        if(alertatexto != null) {
+            alertatexto.setText(AlertaSingleton.getInstance().getAlerta());
+            GaussianBlur blur = new GaussianBlur(10);
+            imagenAlerta.setEffect(blur);
         }
     }
     
@@ -116,7 +133,11 @@ public class FinalController implements Initializable{
     
     @FXML
     private void cerrarStage() {
-        stage = (Stage) cerrar.getScene().getWindow();
+        if(cerrarAlerta == null) {
+            stage = (Stage) cerrar.getScene().getWindow();    
+        } else {
+            stage = (Stage) cerrarAlerta.getScene().getWindow(); 
+        }
         stage.close();
     }
     @FXML
@@ -142,26 +163,37 @@ public class FinalController implements Initializable{
     
     @FXML
     private void enviar() throws IOException {
-        if ((textfield1.isVisible() && textfield1.getText().isBlank()) || 
+        // VALIDACIONES
+        if ((textfield1.isVisible() && textfield1.getText().isBlank()) || // Si los campos estan vacios
            (textfield2.isVisible() && textfield2.getText().isBlank())) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Personaje Nuevo");
-            alert.setHeaderText("Error al mandar la respuesta");
-            alert.setContentText("Debes escribir algo en el campo.");
-            alert.showAndWait();
+            AlertaSingleton.getInstance().setAlerta("Debes escribir algo en el campo.");
+            app.abrirAlerta();
             return;
         }
-        if(textfield1.isVisible()) {
+        if (textfield1.isVisible() && arbol.existeEnArbol(textfield1.getText())) { // Si el personaje ya existe
+            AlertaSingleton.getInstance().setAlerta("Este personaje ya existe en el juego.");
+            app.abrirAlerta();
+            return;
+        }
+        if (textfield2.isVisible() && !textfield2.getText().startsWith("¿") && !textfield2.getText().endsWith("?")) {
+            // Si no tiene formato de pregunta
+            AlertaSingleton.getInstance().setAlerta("La pregunta debe incluir (¿) al inicio y (?) al final.");
+            app.abrirAlerta();
+            return;
+        }
+        if (textfield2.isVisible() && textfield2.getText().replace("¿", "").replace("?", "").isBlank()) {
+            // Si la pregunta esta vacia
+            AlertaSingleton.getInstance().setAlerta("La pregunta debe incluir al menos un caracter.");
+            app.abrirAlerta();
+            return;
+        }
+        if(textfield1.isVisible()) { // Llena campo 1
             respuesta1 = textfield1.getText();
             preguntaPerdida1.setVisible(false);
             textfield1.setVisible(false);
             preguntaPerdida2.setVisible(true);
             textfield2.setVisible(true);
-        } else if(textfield2.isVisible()) {
-            BT<String> arbol = new BT<>();
-            JuegoController juego = new JuegoController();
-            ArrayList<String> arboltxt = juego.leerArchivo();
-            arbol.armarPostOrder(arboltxt);
+        } else if(textfield2.isVisible()) { // Llena campo 2 y guarda respuesta
             arbol.add(textfield2.getText(), respuesta1, searchText);
             reescribirArchivo(arbol.desarmarPostOrder());
             PersonajeSingleton.getInstance().setPersonaje(respuesta1);

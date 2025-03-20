@@ -78,6 +78,40 @@ public class BT<E> {
         return encontrar;
     }
     
+    public boolean existeEnArbol(E e) {
+        return existeEnArbol(root, e);
+    }
+
+    private boolean existeEnArbol(Node<E> p, E e) {
+        if (p == null || e == null) return false;
+        if (existe(p, e)) {
+            return true;
+        }
+        return existeEnArbol(p.left, e) || existeEnArbol(p.right, e);
+    }
+    
+    private boolean existe(Node<E> p, E e) {
+        if(e == null || p == null) return false;
+        if(p.data instanceof String && e instanceof String) { // Solo asegurando que entre un string
+            String original = (String) p.data; // lo paso de object a string a ambos
+            String nuevo = (String) e;
+            if(!original.startsWith("¿")) { // asegurandome de que no estoy con una pregunta
+                String[] data_split = original.split(" "); // separo al actor en nombres y apellidos
+                int actorCompleto = 0;
+                for(int i = 0; i < data_split.length; i++) {
+                    if(nuevo.toLowerCase().contains(data_split[i].toLowerCase())) {
+                        actorCompleto++; // Porque hay actores que solo tiene uno o dos nombres
+                        // es validacion para saber si todo el actor esta presente en el otro string
+                    }
+                }
+                if(actorCompleto == data_split.length) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     public boolean add(E pregunta, E izquierdo, E derecho) {
         Node<E> padre = buscar(derecho);
         if (padre == null || padre.left != null || padre.right != null) {

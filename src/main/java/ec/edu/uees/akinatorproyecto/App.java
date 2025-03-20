@@ -9,7 +9,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 import javafx.animation.FadeTransition;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
@@ -68,6 +71,15 @@ public class App extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
+    }
+    
+    public void abrirAlerta() throws IOException {
+        Stage stage2 = new Stage();
+        stage2.initStyle(javafx.stage.StageStyle.UNDECORATED);
+        scene = new Scene(loadFXML("alerta"));
+        scene.getStylesheets().add(getClass().getResource("/css/estilos.css").toExternalForm());
+        stage2.setScene(scene);
+        stage2.show();
     }
 
     public static void main(String[] args) {
