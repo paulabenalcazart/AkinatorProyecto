@@ -23,7 +23,7 @@
     -fx-stroke-width: 2px; 
 } 
 
-#botonPlay, #botonOptions, #botonMenu {
+#botonPlay, #botonOptions {
     -fx-font-family: "MrsEavesBold" Arial;
     -fx-font-size: 28px;
     -fx-text-fill: black;
@@ -36,8 +36,8 @@
     -fx-effect: innershadow(gaussian, #FFFFFF80, 10, 0.5, 0, -2);
 }
 
-#btnRegresar, #btnReset {
-  -fx-font-family: "MrsEavesBold" Arial;
+#btnRegresar, #btnReset, #btnSiResultado, #btnNoResultado, #btnHome {
+    -fx-font-family: "MrsEavesBold" Arial;
     -fx-font-size: 20px;
     -fx-text-fill: black;
     -fx-background-color: linear-gradient(#FFD700, #FFA500);
@@ -47,6 +47,19 @@
     -fx-background-radius: 10px;
     -fx-background-insets: 0, 1, 2;
     -fx-effect: innershadow(gaussian, #FFFFFF80, 10, 0.5, 0, -2);  
+}
+
+#btnEnviar {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-background-color: black;
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-insets: 0, 1, 2;
+    -fx-effect: innershadow(gaussian, #FFFFFF80, 10, 0.5, 0, -2); 
 }
 
 #botonSi, #botonNo {
@@ -59,7 +72,7 @@
     -fx-effect: innershadow(gaussian, #FFFFFF80, 10, 0.5, 0, -2);
 }
 
-#txtUEES {
+#txtUEES, #lblAkinatorFinal, #preguntaPerdida1, #preguntaPerdida2 {
     -fx-font-family: "MrsEavesBold" Arial;
     -fx-font-size: 20px;
     -fx-text-fill: black;
@@ -134,9 +147,16 @@
     -fx-font-size: 24px;
 }
 
-#botonPlay:hover, #botonOptions:hover, #botonSi:hover, #botonNo:hover, #botonMenu:hover, #btnRegresar:hover, #btnReset:hover {
+#botonPlay:hover, #botonOptions:hover, #botonSi:hover, #botonNo:hover, 
+#btnRegresar:hover, #btnReset:hover, #btnSiResultado:hover, #btnNoResultado:hover, #btnHome:hover {
     -fx-background-color: linear-gradient(#603813, #B29F94);
     -fx-text-fill: white;
+}
+
+#btnEnviar:hover {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-border-color: black;
 }
 
 #cerrar, #minimizar {
@@ -152,4 +172,14 @@
 
 #minimizar:hover {
     -fx-background-color:#E8E7E7;
+}
+
+#textfield1, #textfield2 {
+    -fx-font-family: "MrsEavesBold" Arial;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-alignment: center;
 }

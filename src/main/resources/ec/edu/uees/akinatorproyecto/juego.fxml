@@ -50,22 +50,22 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="177.0" opacity="0.7" stroke="BLACK" strokeType="INSIDE" translateX="-1.0" width="455.0" />
             <HBox layoutY="174.0" prefHeight="76.0" prefWidth="450.0">
                <children>
-                  <Button fx:id="botonSi" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="74.0" prefWidth="226.0" text="Sí">
+                  <Button fx:id="botonSi" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#botonSi" prefHeight="74.0" prefWidth="226.0" text="Sí">
                      <font>
                         <Font name="MrsEavesBold" size="28.0" />
                      </font>
                   </Button>
-                  <Button fx:id="botonNo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="74.0" prefWidth="226.0" text="No">
+                  <Button fx:id="botonNo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#botonNo" prefHeight="74.0" prefWidth="226.0" text="No">
                      <font>
                         <Font name="MrsEavesBold" size="28.0" />
                      </font>
                   </Button>
                </children>
             </HBox>
-            <VBox alignment="TOP_CENTER" prefHeight="177.0" prefWidth="450.0" spacing="35.0">
+            <VBox alignment="TOP_CENTER" prefHeight="177.0" prefWidth="450.0">
                <children>
-                  <Label fx:id="labelNum" text="Pregunta N° 1:" />
-                  <Label fx:id="labelPregunta" text="¿Tu personaje es ...?" wrapText="true" />
+                  <Label fx:id="labelNum" text="Pregunta N° 1" />
+                  <Label fx:id="labelPregunta" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="116.0" prefWidth="354.0" text="¿Tu personaje es ...?" textAlignment="CENTER" wrapText="true" />
                </children>
                <padding>
                   <Insets top="10.0" />

@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class BT<E> {
     private Node<E> root;
-    private int contador = 0;;
+    private Node<E> current;
     
     class Node<E> {
         E data;
@@ -15,6 +15,34 @@ public class BT<E> {
         Node(E data) {
             this.data = data;
         }
+    }
+    
+    public boolean irIzquierda() {
+        if (current == null || current.left.left == null) {
+            return false;
+        }
+        current = current.left;
+        return true;
+    }
+    
+    public void irHojaIzq() {
+        current = current.left;
+    }
+    
+    public void irHojaDer() {
+        current = current.right;
+    }
+    
+    public boolean irDerecha() {
+        if (current == null || current.right.right == null) {
+            return false;
+        }
+        current = current.right;
+        return true;
+    }
+    
+    public E getCurrent() {
+        return this.current.data;
     }
 
     public void armarPostOrder(List<E> postorder) {
@@ -30,6 +58,7 @@ public class BT<E> {
             stack.push(nodo); // metemos el nodo a la pila
         }
         root = stack.pop(); // la raiz del árbol es el ultimo nodo que queda en la pila
+        current = root;
     }
 
     public void preOrden() {

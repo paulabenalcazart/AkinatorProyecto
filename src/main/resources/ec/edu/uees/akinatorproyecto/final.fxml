@@ -46,7 +46,7 @@
       </ImageView>
       <VBox alignment="TOP_CENTER" layoutX="47.0" layoutY="106.0" prefHeight="320.0" prefWidth="260.0" spacing="10.0">
          <children>
-            <Label fx:id="personajeEs" text="Tu personaje es..." />
+            <Label fx:id="personajeEs" text="¿Tu personaje es..?." />
             <Label fx:id="labelResultado" text="[Nombre del personaje]" />
             <ImageView fx:id="imagenResultado" fitHeight="191.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" translateY="10.0">
                <image>
@@ -60,7 +60,12 @@
       </VBox>
       <StackPane layoutX="113.0" layoutY="334.0" prefHeight="150.0" prefWidth="200.0">
          <children>
-            <ImageView fx:id="akinatorFinal1" fitHeight="366.0" fitWidth="427.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="akinatorFinalDefault" fitHeight="366.0" fitWidth="427.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../imagenes/akinatorFinalDefault.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="akinatorFinal1" fitHeight="366.0" fitWidth="427.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../../imagenes/akinatorFinal.png" />
                </image>
@@ -72,10 +77,34 @@
             </ImageView>
          </children>
       </StackPane>
-      <Button fx:id="botonMenu" layoutX="43.0" layoutY="578.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="62.0" prefWidth="183.0" text="Menú">
-         <font>
-            <Font name="MrsEavesBold" size="28.0" />
-         </font>
-      </Button>
+      <StackPane layoutX="25.0" layoutY="499.0" prefHeight="150.0" prefWidth="160.0">
+         <children>
+            <Button fx:id="btnHome" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="74.0" prefWidth="216.0" text="Regresar" visible="false" />
+            <VBox fx:id="vboxBotonesResultados" prefHeight="139.0" prefWidth="160.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnSiResultado" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnResultadoSi" prefHeight="60.0" prefWidth="160.0" text="Sí">
+                     <font>
+                        <Font name="MrsEavesBold" size="28.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnNoResultado" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnResultadoNo" prefHeight="60.0" prefWidth="160.0" text="No">
+                     <font>
+                        <Font name="MrsEavesBold" size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+      <StackPane fx:id="stackBurbuja" layoutX="280.0" layoutY="250.0" prefHeight="150.0" prefWidth="200.0" visible="false">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../imagenes/burbujaimagen.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblAkinatorFinal" prefHeight="78.0" prefWidth="94.0" text="¡Genial, acierto de nuevo!" textAlignment="CENTER" translateY="-15.0" wrapText="true" />
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

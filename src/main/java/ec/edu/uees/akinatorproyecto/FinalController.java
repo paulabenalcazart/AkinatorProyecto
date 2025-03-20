@@ -1,6 +1,10 @@
 package ec.edu.uees.akinatorproyecto;
 
+import ec.edu.uees.modelo.PersonajeSingleton;
+import ec.edu.uees.modelo.ResultadoSingleton;
 import ec.edu.uees.opciones.ScreenManager;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -8,21 +12,30 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class FinalController implements Initializable{
     private String searchText;
     private String imageUrl;
-    @FXML private ImageView imagenResultado;
+    @FXML private ImageView imagenResultado, akinatorFinalDefault, akinatorFinal1, akinatorFinal2;
     @FXML private AnchorPane mainAnchor;
+    @FXML private StackPane stackBurbuja;
     private Stage stage;
     private double xOffset = 0;
     private double yOffset = 0;
-    @FXML private Button cerrar, minimizar;
+    @FXML private Button cerrar, minimizar, btnHome;
+    @FXML private Label labelResultado, preguntaPerdida1, preguntaPerdida2,lblAkinatorFinal;
+    @FXML private VBox vboxBotonesResultados;
+    @FXML private TextField textfield1, textfield2;
     
     @FXML
     private void switchToMenu() throws IOException {
@@ -31,11 +44,14 @@ public class FinalController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        searchText = "Brad Pitt";
-        imageUrl = getWikipediaImage(searchText);
-        if (imageUrl != null) {
-            Image image = new Image(imageUrl, true);
-            imagenResultado.setImage(image);
+        searchText = PersonajeSingleton.getInstance().getPersonaje();
+        if(labelResultado != null) {
+            labelResultado.setText(searchText);
+            imageUrl = getWikipediaImage(searchText);
+            if (imageUrl != null) {
+                Image image = new Image(imageUrl, true);
+                imagenResultado.setImage(image);
+            }
         }
         
         if(!ScreenManager.getInstance().isScreenLocked()) {
@@ -51,6 +67,20 @@ public class FinalController implements Initializable{
                     stage.setY(e.getScreenY() - yOffset);
                 }
             });
+        }
+        
+        if(preguntaPerdida2 != null) {
+            preguntaPerdida2.setText("¿Cuál sería la pregunta que lo diferencia de "+searchText+"?");
+        }
+        
+        if(labelResultado != null && ResultadoSingleton.getInstance().getResultado()) {
+            akinatorFinal2.setVisible(true);
+            akinatorFinalDefault.setVisible(false);
+            vboxBotonesResultados.setVisible(false);
+            btnHome.setVisible(true);
+            lblAkinatorFinal.setText("¡Bravo! Me lo has puesto difícil.");
+            stackBurbuja.setVisible(true);
+            ResultadoSingleton.getInstance().setResultado(false);
         }
     }
     
@@ -91,4 +121,54 @@ public class FinalController implements Initializable{
         stage.setIconified(true);
     }
     
+    @FXML
+    private void btnResultadoSi() {
+        akinatorFinal1.setVisible(true);
+        akinatorFinalDefault.setVisible(false);
+        vboxBotonesResultados.setVisible(false);
+        btnHome.setVisible(true);
+        stackBurbuja.setVisible(true);
+    }
+    
+    @FXML
+    private void btnResultadoNo() throws IOException {
+        ResultadoSingleton.getInstance().setResultado(true);
+        App.setRootSinAnimar("finalPerdido");
+    }
+    
+    @FXML
+    private void enviar() {
+        if ((textfield1.isVisible() && textfield1.getText().isBlank()) || 
+           (textfield2.isVisible() && textfield2.getText().isBlank())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Personaje Nuevo");
+            alert.setHeaderText("Error al mandar la respuesta");
+            alert.setContentText("Debes escribir algo en el campo.");
+            alert.showAndWait();
+            return;
+        }
+        if(textfield1.isVisible()) {
+            String archivo = "actoresExtras.txt";
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
+                bw.write(textfield1.getText());
+                bw.newLine();
+                preguntaPerdida1.setVisible(false);
+                textfield1.setVisible(false);
+                preguntaPerdida2.setVisible(true);
+                textfield2.setVisible(true);
+            } catch (IOException ex) {
+                System.out.println("Error al escribir el archivo: " + ex.getMessage());
+            }
+        } else if(textfield2.isVisible()) {
+            String archivo = "actoresExtras.txt";
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
+                bw.write(textfield2.getText());
+                bw.newLine();
+                PersonajeSingleton.getInstance().setPersonaje(textfield1.getText());
+                App.setRootSinAnimar("final");
+            } catch (IOException ex) {
+                System.out.println("Error al escribir el archivo: " + ex.getMessage());
+            }
+        }
+    }
 }
