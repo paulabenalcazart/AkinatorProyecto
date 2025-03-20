@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -30,6 +32,9 @@ public class JuegoController implements Initializable{
     private int contador = 1;
     private boolean pregunta = false;
     private char direccion = 'N';
+    @FXML ImageView akinator;
+    private int contadorSiSeguidos;
+    private int contadorNoSeguidos;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -51,11 +56,25 @@ public class JuegoController implements Initializable{
         labelPregunta.setText(arbol.getCurrent());    
     }
     
+    public void cambiarExpresion(String nombreImagen) {
+        String ruta = "/imagenes/" + nombreImagen + ".png"; 
+        Image nuevaImagen = new Image(getClass().getResourceAsStream(ruta));
+        akinator.setImage(nuevaImagen);
+    }
+    
     @FXML
     private void botonSi() throws IOException {
         SFXPlayer.playSFX();
         pregunta = arbol.irIzquierda();
         direccion = 'I';
+        contadorSiSeguidos++;
+        if(contadorSiSeguidos == 2 || contadorNoSeguidos >= 3){
+            cambiarExpresion("akinator8");
+        }
+        else if(contadorSiSeguidos >= 4){
+            cambiarExpresion("akinator2");
+        }
+        contadorNoSeguidos = 0;      
         aumentarPregunta();
     }
     
@@ -64,6 +83,14 @@ public class JuegoController implements Initializable{
         SFXPlayer.playSFX();
         pregunta = arbol.irDerecha();
         direccion = 'D';
+        contadorNoSeguidos++;
+        if(contadorSiSeguidos >= 3){
+            cambiarExpresion("akinator6");
+        }
+        contadorSiSeguidos = 0;
+        if(contadorNoSeguidos >= 3){
+            cambiarExpresion("akinator3");
+        }
         aumentarPregunta();
     }
     
