@@ -36,6 +36,7 @@ public class FinalController implements Initializable{
     @FXML private Label labelResultado, preguntaPerdida1, preguntaPerdida2,lblAkinatorFinal;
     @FXML private VBox vboxBotonesResultados;
     @FXML private TextField textfield1, textfield2;
+    private String respuesta1;
     
     @FXML
     private void switchToMenu() throws IOException {
@@ -148,20 +149,16 @@ public class FinalController implements Initializable{
             return;
         }
         if(textfield1.isVisible()) {
-            String archivo = "actoresExtras.txt";
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
-                bw.write(textfield1.getText());
-                bw.newLine();
-                preguntaPerdida1.setVisible(false);
-                textfield1.setVisible(false);
-                preguntaPerdida2.setVisible(true);
-                textfield2.setVisible(true);
-            } catch (IOException ex) {
-                System.out.println("Error al escribir el archivo: " + ex.getMessage());
-            }
+            respuesta1 = textfield1.getText();
+            preguntaPerdida1.setVisible(false);
+            textfield1.setVisible(false);
+            preguntaPerdida2.setVisible(true);
+            textfield2.setVisible(true);
         } else if(textfield2.isVisible()) {
             String archivo = "actoresExtras.txt";
             try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo, true))) {
+                bw.write(respuesta1);
+                bw.newLine();
                 bw.write(textfield2.getText());
                 bw.newLine();
                 PersonajeSingleton.getInstance().setPersonaje(textfield1.getText());
