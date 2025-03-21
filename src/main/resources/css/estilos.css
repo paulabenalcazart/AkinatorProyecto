@@ -23,6 +23,20 @@
     -fx-stroke-width: 2px; 
 } 
 
+#btnRegresarJuego {
+    -fx-font-family: "Minangkabau", Arial;
+    -fx-font-size: 25px;
+    -fx-text-fill: linear-gradient(#fee69d, #ffa303);
+    -fx-effect: dropshadow(gaussian, #8B0000, 5, 0.3, 3, 3);
+    -fx-stroke: #8B0000;
+    -fx-stroke-width: 2px; 
+    -fx-background-color: transparent;
+}
+
+#btnRegresarJuego:hover {
+    -fx-font-size: 27px;
+}
+
 #botonPlay, #botonOptions {
     -fx-font-family: "MrsEavesBold" Arial;
     -fx-font-size: 28px;

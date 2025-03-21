@@ -9,9 +9,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -35,6 +37,9 @@ public class JuegoController implements Initializable{
     @FXML ImageView akinator;
     private int contadorSiSeguidos;
     private int contadorNoSeguidos;
+    private String[] confiado = {"akinator1","akinator2","akinator8"};
+    private String[] pensante = {"akinator3","akinator4","akinator5"};
+    private String[] asustado = {"akinator6","akinator7","akinator7"};
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,6 +65,11 @@ public class JuegoController implements Initializable{
         String ruta = "/imagenes/" + nombreImagen + ".png"; 
         Image nuevaImagen = new Image(getClass().getResourceAsStream(ruta));
         akinator.setImage(nuevaImagen);
+        if(nombreImagen == "akinator3") {
+            akinator.setNodeOrientation(NodeOrientation.INHERIT);
+        } else {
+            akinator.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+        }
     }
     
     @FXML
@@ -67,12 +77,14 @@ public class JuegoController implements Initializable{
         SFXPlayer.playSFX();
         pregunta = arbol.irIzquierda();
         direccion = 'I';
+        int indiceRD = (int) (Math.random() * 3);
         contadorSiSeguidos++;
-        if(contadorSiSeguidos == 2 || contadorNoSeguidos >= 3){
-            cambiarExpresion("akinator8");
+        if(contadorSiSeguidos == 1 && contadorNoSeguidos == 1){
+            cambiarExpresion(pensante[indiceRD]);
         }
-        else if(contadorSiSeguidos >= 4){
-            cambiarExpresion("akinator2");
+        else if(contadorSiSeguidos >= 2){
+            
+            cambiarExpresion(confiado[indiceRD]);
         }
         contadorNoSeguidos = 0;      
         aumentarPregunta();
@@ -83,14 +95,18 @@ public class JuegoController implements Initializable{
         SFXPlayer.playSFX();
         pregunta = arbol.irDerecha();
         direccion = 'D';
+        int indiceRD = (int) (Math.random() * 3);
         contadorNoSeguidos++;
-        if(contadorSiSeguidos >= 3){
+        if(contadorSiSeguidos == 1 && contadorNoSeguidos == 1){
+            cambiarExpresion(pensante[indiceRD]);
+        }
+        else if(contadorSiSeguidos == 3){
             cambiarExpresion("akinator6");
         }
-        contadorSiSeguidos = 0;
-        if(contadorNoSeguidos >= 3){
-            cambiarExpresion("akinator3");
+        else if(contadorNoSeguidos >= 4){
+            cambiarExpresion(asustado[indiceRD]);
         }
+        contadorSiSeguidos = 0;
         aumentarPregunta();
     }
     
@@ -124,6 +140,11 @@ public class JuegoController implements Initializable{
 
     private void irAFinal() throws IOException {
         App.setRoot("final");
+    }
+    
+    @FXML
+    private void irAMenu() throws IOException {
+        App.setRoot("menu");
     }
 
     public ArrayList<String> leerArchivo() {

@@ -73,5 +73,6 @@
             </VBox>
          </children>
       </Pane>
+      <Button fx:id="btnRegresarJuego" layoutX="-10.0" layoutY="40.0" mnemonicParsing="false" onAction="#irAMenu" prefHeight="1.0" prefWidth="144.0" text="↩ Regresar" />
    </children>
 </AnchorPane>

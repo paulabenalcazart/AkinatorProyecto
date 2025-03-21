@@ -1,8 +1,20 @@
 Robert Downey Jr
+Samuel L. Jackson
+¿Su carrera tuvo un boom cerca de los 2010s?
+Will Smith
+¿Es conocido por un papel importante en el mundo de los superhéroes?
+Jamie Foxx
 Tom Hanks
+¿Ha trabajado con Andrew Garfield?
+Robin Williams
+¿Ha sido reconocido más por su trabajo en drama que en comedia?
 ¿Su carrera está más enfocada a películas de acción?
 Cole Sprouse
+Dylan Sprouse
+¿Le dio un enfoque mayor a la actuación después de Disney?
+Johnny Depp
 Chris Evans
+¿Ha participado en más películas de aventuras y fantasía en lugar de acción pura?
 ¿Es más conocido por televisión que por cine?
 Pedro Pascal
 Ryan Reynolds
@@ -10,34 +22,36 @@ Tom Holland
 ¿Su personaje es mayor a 35 años?
 ¿Es hispanohablante?
 ¿Es estadounidense?
-Will Smith
-¿Ha aparecido más de una vez en Disney?
-¿Ha ganado un Oscar?
+¿Ha ganado un oscar?
 Marlon Brando
 Joaquin Phoenix
 ¿Se hizo famoso en el siglo XX?
+Ryan Gosling
 Timothée Chalamet
-¿Se centra en temas oscuros y serios?
-Jorge Enrique Abello
+¿Lleva más de 20 años actuando?
+¿Se centra principalmente en temas oscuros y serios?
+Christian Bale
 Leonardo DiCaprio
-¿Ha sido protagonista de una telenovela?
+¿Ha estado asociado a películas de superhéroes?
+Ralph Fiennes
+Robert Pattinson
+¿Pertenece a una generación más veterana del cine?
+¿Ganó un oscar?
 ¿Ha sido protagonista de un musical?
-Brad Pitt
-Adam Sandler
-Eugenio Derbez
-¿Su idioma principal es inglés?
-Dwayne Johnson
-¿Su género principal es la comedia?
-Tom Cruise
-¿Ha participado en comedias?
-¿Ha ganado un Oscar?
-¿Es más conocido por dramas?
-¿Estuvo en una película de Disney?
+¿Tiene un papel memorable en Disney?
+Helena Bonham Carter
 Emma Watson
+¿Ha interpretado una villana?
+Zoe Saldaña
 Kristen Stewart
+¿Ha trabajado en Marvel?
 ¿Es de hechizos?
+Sarah Jessica Parker
 Zendaya
+¿Comenzó su carrera en los años 80 o 90?
+Mandy Moore
 Elizabeth Olsen
+¿Cuenta con carrera musical?
 ¿Ha ganado un Emmy?
 Jennifer Lawrence
 Natalie Portman
@@ -45,7 +59,7 @@ Natalie Portman
 Gal Gadot
 Scarlett Johansson
 ¿Ha hecho una película para DC?
-¿Ha ganado un Oscar?
+¿Ha ganado un oscar?
 ¿Ha protagonizado series famosas?
 ¿Es de fantasía?
 Emma Stone
@@ -53,17 +67,23 @@ Selena Gomez
 ¿Actualmente su carrera se centra en actuación?
 Angelina Jolie
 ¿Es conocida por participar en musicales?
+Uma Thurman
 Margot Robbie
-¿Ha trabajado en Disney?
-Florencia Bertotti
-Miranda Cosgrove
+¿Ha interpretado personajes célebres en el género de acción?
+¿Ha tenido un papel memorable en Disney?
+Victoria Justice
 Jennifer Aniston
-¿Ha protagonizado comedias adolescentes?
-¿Su idioma nativo es español?
+¿Se enfoca en público adolescente?
+Amybeth McNulty
 Millie Bobby Brown
+¿Es más conocida por dramas históricos?
 ¿Es más conocida por comedias?
+Lindsay Lohan
 Anne Hathaway
+¿Es famosa desde niña?
+Eliza Scanlen
 Florence Pugh
+¿Ha trabajado en series de HBO?
 ¿Se hizo famosa con películas juveniles?
 ¿Ha protagonizado series famosas?
 ¿Ha interpretado una heroína o villana protagonista en cine o televisión?
