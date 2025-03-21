@@ -65,7 +65,7 @@
             <VBox alignment="TOP_CENTER" prefHeight="177.0" prefWidth="450.0">
                <children>
                   <Label fx:id="labelNum" text="Pregunta N° 1" />
-                  <Label fx:id="labelPregunta" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="116.0" prefWidth="354.0" text="¿Tu personaje es ...?" textAlignment="CENTER" wrapText="true" />
+                  <Label fx:id="labelPregunta" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="132.0" prefWidth="403.0" text="¿Tu personaje es ...?" textAlignment="CENTER" wrapText="true" />
                </children>
                <padding>
                   <Insets top="10.0" />
