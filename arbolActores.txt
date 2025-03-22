@@ -34,8 +34,10 @@ Christian Bale
 Leonardo DiCaprio
 ¿Ha estado asociado a películas de superhéroes?
 Ralph Fiennes
+Dwayne Johnson
 Robert Pattinson
-¿Pertenece a una generación más veterana del cine?
+¿Ha participado en una pelicula animada?
+¿Se hizo famoso en el siglo XX?
 ¿Ganó un oscar?
 ¿Ha sido protagonista de un musical?
 ¿Tiene un papel memorable en Disney?
